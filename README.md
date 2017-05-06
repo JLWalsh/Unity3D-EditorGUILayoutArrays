@@ -18,7 +18,7 @@ void OnInspectorGUI() {
 }
 ```
 
-**Not recommended usage**
+**Not recommended (but still valid) usage**
 ```csharp
 private string arrayFieldTitle = "String array";
 private bool arrayFieldOpen = false;
@@ -49,6 +49,7 @@ Generics could not be used for this project, as Unity has a field function speci
 ### Additional note (s)
 
 **EditorGUILayoutArrays.ArrayFieldSettings (string label, bool open)**:
+
 This class aims at simplifying the usage of the fields. Since custom fields can't contain their values (they have to be stored somewhere outside of the *OnInspectorGUI()* function, they have to be stored somewhere. This class contains two values, the **label (string)**, which represents the title of the array in the editor. The second value, **open (bool)** determines the state of the folding. It's set to *false* by default.
 
 **If you have any suggestions for new array types, feel free to contact me.**
