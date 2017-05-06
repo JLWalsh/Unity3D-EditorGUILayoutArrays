@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEditor;
 
-public static class EditorGUILayoutUtils {
+public static class EditorGUILayoutArrays {
 
     public class ArrayFieldSettings {
 
         public string label;
         public bool open;
 
-        public ArrayFieldSettings(string label = "Array" , bool open = true) {
+        public ArrayFieldSettings(string label = "Array", bool open = true) {
             this.label = label;
             this.open = open;
         }
@@ -175,6 +175,29 @@ public static class EditorGUILayoutUtils {
         return array;
     }
 
+    public static bool[] BooleanArrayField(ArrayFieldSettings settings, bool[] array) {
+        return BooleanArrayField(settings.label, ref settings.open, array);
+    }
+
+    public static bool[] BooleanArrayField(string label, ref bool open, bool[] array) {
+        open = EditorGUILayout.Foldout(open, label);
+        int newSize = array.Length;
+
+        if (open) {
+            newSize = EditorGUILayout.IntField("Size", newSize);
+            newSize = newSize < 0 ? 0 : newSize;
+
+            if (newSize != array.Length) {
+                array = ResizeArray<bool>(array, newSize);
+            }
+
+            for (var i = 0; i < newSize; i++) {
+                array[i] = EditorGUILayout.Toggle("Value " + i, array[i]);
+            }
+        }
+        return array;
+    }
+
     public static Color[] ColorArrayField(ArrayFieldSettings settings, Color[] array) {
         return ColorArrayField(settings.label, ref settings.open, array);
     }
@@ -200,9 +223,9 @@ public static class EditorGUILayoutUtils {
 
     private static T[] ResizeArray<T>(T[] array, int size) {
         T[] newArray = new T[size];
-        
-        for(var i = 0; i < size; i++) {
-            if(i < array.Length) {
+
+        for (var i = 0; i < size; i++) {
+            if (i < array.Length) {
                 newArray[i] = array[i];
             }
         }
