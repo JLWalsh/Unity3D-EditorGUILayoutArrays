@@ -34,7 +34,7 @@ void OnInspectorGUI() {
 ![image](http://i.imgur.com/jTMB8A3.png)
 
 ### Supported Types
-Generics could not be used for this project, as Unity has a field function specific for each type. As of now, the supported types are:
+As of now, the supported types are:
 
 - string
 - int
